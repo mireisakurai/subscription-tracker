@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Palette lives in CSS variables so the dark theme is a single block of value
+ * swaps rather than a `dark:` variant on every element.
+ */
+:root {
+  --bg: 249 250 251;
+  --surface: 255 255 255;
+  --raised: 243 244 246;
+  --line: 229 231 235;
+  --ink: 17 24 39;
+  --muted: 107 114 128;
+  --faint: 156 163 175;
+  --accent: 79 70 229;
+  --accent-ink: 255 255 255;
+  --positive: 5 150 105;
+  --warn: 180 83 9;
+  --danger: 220 38 38;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 12 14 18;
+    --surface: 22 25 31;
+    --raised: 31 35 43;
+    --line: 45 50 60;
+    --ink: 237 240 245;
+    --muted: 148 156 170;
+    --faint: 110 118 132;
+    --accent: 129 140 248;
+    --accent-ink: 17 20 27;
+    --positive: 52 211 153;
+    --warn: 251 191 36;
+    --danger: 248 113 113;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-ink antialiased;
+  }
+}
+
+@layer utilities {
+  /* Tabular figures keep money columns aligned as values change. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .field {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink
+           outline-none transition placeholder:text-faint
+           focus:border-accent focus:ring-2 focus:ring-accent/25;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm
+           font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-accent-ink hover:opacity-90;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:bg-raised;
+  }
+
+  .btn-danger {
+    @apply btn border border-danger/30 bg-transparent text-danger hover:bg-danger/10;
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-surface;
+  }
+}
